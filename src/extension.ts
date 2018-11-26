@@ -34,6 +34,7 @@ export function deactivate() {
 class NavExt {
     readonly codes = "qweasdzxcrtyghvbnuioklmp".split("");
 
+    private _config: any;
     private _navMode: boolean;
     private _statusBarItem: vscode.StatusBarItem;
     private _decorations: vscode.TextEditorDecorationType[];
@@ -41,6 +42,7 @@ class NavExt {
     private _input: string;
 
     constructor() {
+        this._config = vscode.workspace.getConfiguration('visualNav');
         this._navMode = false;
         this._statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
         this._statusBarItem.hide();
@@ -123,10 +125,10 @@ class NavExt {
 
             indices.sort((a,b) => a-b);
 
-            let lastIndex = -3;
+            let lastIndex = -this._config.minimumGap - 1;
             let actualIndices: number[] = [];
             for(let index of indices) {
-                if (index - lastIndex > 2) {
+                if (index - lastIndex > this._config.minimumGap) {
                     actualIndices.push(index);
                     lastIndex = index;
                 }
@@ -212,7 +214,7 @@ class NavExt {
     }
 
     private _scroll(direction: string) {
-        vscode.commands.executeCommand('editorScroll', { to: direction, by: 'line', value: 5 });
+        vscode.commands.executeCommand('editorScroll', { to: direction, by: 'line', value: this._config.scrollStep });
     }
 
     private _navType(text: String) {
