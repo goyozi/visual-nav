@@ -1,31 +1,26 @@
-# hello-world README
+# VisualNav
 
-This is the README for your extension "hello-world". After writing up a brief description, we recommend including the following sections.
+VisualNav is a Visual Studio code extension providing a "visual navigation" feature, allowing you to quickly jump
+between different parts of your code based on their visual location.
+
+In a sense, VisualNav is trying to replace mouse-based navigation, but without requiring you to think *how* to get
+to a certain place in the code. You simply "see" where you want to go.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+The navigation mode is toggled by pressing `Alt+A` and provides two features:
 
-For example if there is an image subfolder under your extension project workspace:
+* scrolling up and down by pressing `f` and `j` respectively
+* jumping to a place in the code by entering the characters shown at desired point
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+When navigation mode is active, an indicator on the bottom bar shows you the characters you already typed.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* `visualNav.minimumGap`: minimum number of characters between navigation points (default: 2)
+* `visualNav.scrollStep`: number of lines to scroll up/down in one step (default: 5)
 
 ## Known Issues
 
@@ -33,33 +28,8 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+Basic idea working.
 
 **Enjoy!**
