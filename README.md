@@ -24,7 +24,9 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+The extension doesn't work properly when navigation mode is active in one file and you try to edit another.
+
+Since there are no tests in place yet, there's probably way more than that, but I haven't noticed it yet.
 
 ## Release Notes
 
