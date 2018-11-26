@@ -63,7 +63,8 @@ class NavExt {
                     after: {
                         contentText: code,
                         backgroundColor: '#efdb00',
-                        color: '#220000'
+                        color: '#220000',
+                        margin: '2px'
                     },
                 });
 
@@ -88,31 +89,57 @@ class NavExt {
         let result: vscode.Position[] = [];
         let lines = text.split(/\r?\n/);
         for (let i = 0; i < lines.length; ++i) {
+            let indices: number[] = [];
+
             let start = lines[i].search(/[^\s\\]/);
             if (start !== -1) {
-                result.push(new vscode.Position(i, start));
+                indices.push(start);
             }
 
             if (lines[i].trim().length > 0) {
-                result.push(new vscode.Position(i, lines[i].length));
+                indices.push(lines[i].length);
             }
 
             let dots = this._findAll(lines[i], /\./g);
-            dots.forEach((index) => result.push(new vscode.Position(i, index)));
+            dots.forEach((index) => indices.push(index));
 
-            let commas = this._findAll(lines[i], /\,/g);
-            commas.forEach((index) => result.push(new vscode.Position(i, index)));
+            let commas = this._findAll(lines[i], /\, /g);
+            commas.forEach((index) => indices.push(index));
 
-            let brackets = this._findAll(lines[i], /\(/g);
-            brackets.forEach((index) => result.push(new vscode.Position(i, index)));
+            let colons = this._findAll(lines[i], /\: /g);
+            colons.forEach((index) => indices.push(index));
+
+            let brackets = this._findAll(lines[i], /\(|\[|\{/g);
+            brackets.forEach((index) => indices.push(index));
+
+            let tags = this._findAll(lines[i], />/g);
+            tags.forEach((index) => indices.push(index));
+
+            let loneEquals = this._findAll(lines[i], /= /g);
+            loneEquals.forEach((index) => indices.push(index));
+
+            let friendlyEquals = this._findAll(lines[i], /=[^ ]/g);
+            friendlyEquals.forEach((index) => indices.push(index - 1));
+
+            indices.sort((a,b) => a-b);
+
+            let lastIndex = -3;
+            let actualIndices: number[] = [];
+            for(let index of indices) {
+                if (index - lastIndex > 2) {
+                    actualIndices.push(index);
+                    lastIndex = index;
+                }
+            }
+
+            actualIndices.forEach((index) => result.push(new vscode.Position(i, index)));
         }
         return result;
     }
 
     private _findAll(text: string, regexp: RegExp): number[] {
         let result: number[] = [];
-        let arr;
-        while ((arr = regexp.exec(text))) {
+        while (regexp.exec(text)) {
             result.push(regexp.lastIndex);
         }
         return result;
