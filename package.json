@@ -33,18 +33,18 @@
     },
     "commands": [
       {
-        "command": "extension.toggleNav",
+        "command": "visualNav.toggleNav",
         "title": "Toggle Navigation"
       }
     ],
     "keybindings": [
       {
-        "command": "extension.toggleNav",
+        "command": "visualNav.toggleNav",
         "key": "alt+a",
         "when": "editorTextFocus"
       },
       {
-        "command": "extension.onBackspace",
+        "command": "visualNav.onBackspace",
         "key": "Backspace",
         "when": "editorTextFocus"
       }

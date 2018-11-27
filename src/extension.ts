@@ -15,13 +15,13 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    registerCommandNice('extension.onBackspace', (args) => {
+    registerCommandNice('visualNav.onBackspace', (args) => {
         if (vscode.window.activeTextEditor) {
             navExt.deleteLeft();
         }
     });
 
-    registerCommandNice('extension.toggleNav', (args) => {
+    registerCommandNice('visualNav.toggleNav', (args) => {
         if (vscode.window.activeTextEditor) {
             navExt.toggleNavMode();
         }
@@ -105,23 +105,20 @@ class NavExt {
             let dots = this._findAll(lines[i], /\./g);
             dots.forEach((index) => indices.push(index));
 
-            let commas = this._findAll(lines[i], /\, /g);
+            let commas = this._findAll(lines[i], /, /g);
             commas.forEach((index) => indices.push(index));
 
-            let colons = this._findAll(lines[i], /\: /g);
+            let colons = this._findAll(lines[i], /: */g);
             colons.forEach((index) => indices.push(index));
 
-            let brackets = this._findAll(lines[i], /\(|\[|\{/g);
+            let brackets = this._findAll(lines[i], /[([{]+ */g);
             brackets.forEach((index) => indices.push(index));
-
-            let tags = this._findAll(lines[i], />/g);
+            
+            let tags = this._findAll(lines[i], /> */g);
             tags.forEach((index) => indices.push(index));
 
-            let loneEquals = this._findAll(lines[i], /= /g);
-            loneEquals.forEach((index) => indices.push(index));
-
-            let friendlyEquals = this._findAll(lines[i], /=[^ ]/g);
-            friendlyEquals.forEach((index) => indices.push(index - 1));
+            let equalsCombos = this._findAll(lines[i], /[+\-\*/<>]?=+>? */g);
+            equalsCombos.forEach((index) => indices.push(index));
 
             indices.sort((a,b) => a-b);
 
