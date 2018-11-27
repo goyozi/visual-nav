@@ -20,6 +20,14 @@ export class NavExt {
         this._input = "";
     }
 
+    resetState() {
+        this._navMode = false;
+        this._combinations = new Map();
+        this._input = "";
+        this._editor.clearDecorations();
+        this._updateStatusBar();
+    }
+
     toggleNavMode() {
         this._navMode = !this._navMode;
 
@@ -33,13 +41,11 @@ export class NavExt {
 
             this._combinations = combinations;
             this._input = "";
-
-            this._updateStatusBar();
-            this._indicator.showStatus();
         } else {
             this._editor.clearDecorations();
-            this._indicator.hideStatus();
         }
+
+        this._updateStatusBar();
     }
 
     private _findMoveCandidates(text: string): Position[] {
@@ -189,7 +195,12 @@ export class NavExt {
     }
 
     private _updateStatusBar() {
-        this._indicator.setStatus("Nav: " + (this._input ? this._input : "*empty*"));
+        if (this._navMode) {
+            this._indicator.setStatus("Nav: " + (this._input ? this._input : "*empty*"));
+            this._indicator.showStatus();
+        } else {
+            this._indicator.hideStatus();
+        }
     }
 }
 

@@ -24,9 +24,7 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-The extension doesn't work properly when navigation mode is active in one file and you try to edit another.
-
-Since there are no tests in place yet, there's probably way more than that, but I haven't noticed it yet.
+There are no tests in place yet, so there probably are issues, but I haven't noticed (and not fixed) them yet.
 
 ## Release Notes
 

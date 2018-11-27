@@ -16,6 +16,11 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.workspace.getConfiguration('visualNav')
     );
 
+    let disposable = vscode.window.onDidChangeActiveTextEditor(() => {
+       navExt.resetState();
+    });
+    context.subscriptions.push(disposable);
+
     registerCommandNice('type', (args) => {
         if (vscode.window.activeTextEditor) {
             navExt.type(args.text);
