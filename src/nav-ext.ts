@@ -83,10 +83,10 @@ export class NavExt {
 
             indices.sort((a, b) => a - b);
 
-            let lastIndex = -this._config.minimumGap - 1;
+            let lastIndex = -this._config.minimumGap;
             let actualIndices: number[] = [];
             for (let index of indices) {
-                if (index - lastIndex > this._config.minimumGap) {
+                if (index - lastIndex >= this._config.minimumGap) {
                     actualIndices.push(index);
                     lastIndex = index;
                 }
