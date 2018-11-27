@@ -10,8 +10,10 @@ to a certain place in the code. You simply "see" where you want to go.
 
 The navigation mode is toggled by pressing `Alt+A` and provides two features:
 
+* jumping to a place in the code by entering the characters shown at desired point:
+![](navigation.gif)
 * scrolling up and down by pressing `f` and `j` respectively
-* jumping to a place in the code by entering the characters shown at desired point
+![](scrolling.gif)
 
 When navigation mode is active, an indicator on the bottom bar shows you the characters you already typed.
 
