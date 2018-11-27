@@ -15,7 +15,9 @@ The navigation mode is toggled by pressing `Alt+A` and provides two features:
 * scrolling up and down by pressing `f` and `j` respectively
 ![](scrolling.gif)
 
+
 When navigation mode is active, an indicator on the bottom bar shows you the characters you already typed.
+![](status.png)
 
 ## Extension Settings
 
